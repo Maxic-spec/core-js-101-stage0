@@ -66,7 +66,7 @@ function getStringFromTemplate(firstName, lastName) {
 function extractNameFromTemplate(value) {
   const length = value.length;
   let forSlice = length - 1;
-  return
+  return value.slice(6,forSlice);
 }
 
 /**
@@ -95,7 +95,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-  return ;
+  return value.trim();
 }
 
 /**
@@ -125,8 +125,8 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  return str.replace(value, '');
 }
 
 /**
@@ -140,8 +140,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1,-1);
 }
 
 /**
@@ -220,8 +220,14 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  function encodeToRot13(str) {
+  return str.replace(/[A-Za-z]/g, (char) => {
+    const code = char.charCodeAt(0);
+    const base = code >= 97 ? 97 : 65; // 97 = 'a', 65 = 'A'
+    return String.fromCharCode(((code - base + 13) % 26) + base);
+  });
+}
 }
 
 /**
